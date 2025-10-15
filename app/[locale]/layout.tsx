@@ -7,7 +7,7 @@ import DynamicTextGraphic from "../../components/DynamicTextGraphic";
 
 export const dynamicParams = false;
 export async function generateStaticParams() { 
-  return [{ locale: "en" }, { locale: "ar" }, { locale: "he" }]; 
+  return [{ locale: "ar" }, { locale: "he" }, { locale: "en" }]; 
 }
 
 export const metadata = {
@@ -18,7 +18,7 @@ export const metadata = {
 export default function RootLayout({
   params, children
 }: { params: { locale: Locale }, children: React.ReactNode }) {
-  const locale = params.locale ?? "en";
+  const locale = params.locale ?? "ar";
   const rtl = isRTL(locale);
   const t = getMessages(locale);
 
