@@ -1,7 +1,7 @@
 'use client';
 
 import { useRouter } from 'next/navigation';
-import { useState } from 'react';
+import { useState, useEffect, useRef } from 'react';
 
 const languages = [
   { code: 'en', name: 'English', flag: '🇺🇸' },
@@ -12,10 +12,33 @@ const languages = [
 export default function LanguageSwitcher({ currentLocale }: { currentLocale: string }) {
   const router = useRouter();
   const [isOpen, setIsOpen] = useState(false);
+  const [mounted, setMounted] = useState(false);
+  const dropdownRef = useRef<HTMLDivElement>(null);
   
   const currentLanguage = languages.find(lang => lang.code === currentLocale) || languages[0];
 
+  // Ensure component is mounted before showing interactive elements
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  // Close dropdown when clicking outside
+  useEffect(() => {
+    function handleClickOutside(event: MouseEvent) {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
+        setIsOpen(false);
+      }
+    }
+
+    if (isOpen && mounted) {
+      document.addEventListener('mousedown', handleClickOutside);
+      return () => document.removeEventListener('mousedown', handleClickOutside);
+    }
+  }, [isOpen, mounted]);
+
   const handleLanguageChange = (locale: string) => {
+    if (!mounted) return;
+    
     // Extract the current path without locale
     let currentPath = window.location.pathname;
     
@@ -40,11 +63,12 @@ export default function LanguageSwitcher({ currentLocale }: { currentLocale: str
   };
 
   return (
-    <div className="relative">
+    <div className="relative" ref={dropdownRef}>
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className="flex items-center gap-2 px-3 py-1.5 text-sm border rounded hover:bg-gray-50"
+        className="flex items-center gap-2 px-3 py-1.5 text-sm border rounded hover:bg-gray-50 transition-colors"
         aria-label="Select language"
+        aria-expanded={isOpen}
       >
         <span>{currentLanguage.flag}</span>
         <span className="hidden sm:inline">{currentLanguage.name}</span>
@@ -64,7 +88,7 @@ export default function LanguageSwitcher({ currentLocale }: { currentLocale: str
             <button
               key={language.code}
               onClick={() => handleLanguageChange(language.code)}
-              className={`w-full px-3 py-2 text-sm text-left hover:bg-gray-50 flex items-center gap-2 ${
+              className={`w-full px-3 py-2 text-sm text-left hover:bg-gray-50 flex items-center gap-2 transition-colors ${
                 language.code === currentLocale ? 'bg-sky text-white hover:bg-sky' : ''
               }`}
             >
