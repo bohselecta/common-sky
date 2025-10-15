@@ -15,8 +15,11 @@ export default function RegisterPage({ params }: { params: { locale: Locale } })
       headers: { "content-type": "application/json" },
       body: JSON.stringify({ idCode: idCode.trim() })
     });
-    if (r.ok) window.location.href = `/${params.locale}/dashboard`;
-    else setStatus(t.register.error);
+    if (r.ok) {
+      window.location.href = `/${params.locale}/dashboard`;
+    } else {
+      setStatus(t.register.error);
+    }
   }
 
   return (

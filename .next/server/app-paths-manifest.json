@@ -1,1 +1,8 @@
-{}
+{
+  "/_not-found/page": "app/_not-found/page.js",
+  "/api/tools/citizen-app/manifest/route": "app/api/tools/citizen-app/manifest/route.js",
+  "/api/register/route": "app/api/register/route.js",
+  "/api/receipts/route": "app/api/receipts/route.js",
+  "/[locale]/page": "app/[locale]/page.js",
+  "/[locale]/tools/page": "app/[locale]/tools/page.js"
+}

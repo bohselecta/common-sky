@@ -1,6 +1,6 @@
 'use client';
 
-import { useRouter } from 'next/router';
+import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 
 const languages = [
@@ -17,7 +17,7 @@ export default function LanguageSwitcher({ currentLocale }: { currentLocale: str
 
   const handleLanguageChange = (locale: string) => {
     // Extract the current path without locale
-    const currentPath = router.asPath.replace(/^\/[a-z]{2}/, '') || '/';
+    const currentPath = window.location.pathname.replace(/^\/[a-z]{2}/, '') || '/';
     const newPath = `/${locale}${currentPath}`;
     router.push(newPath);
     setIsOpen(false);
