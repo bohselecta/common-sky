@@ -1,8 +1,12 @@
 {
   "/_not-found/page": "app/_not-found/page.js",
-  "/api/tools/citizen-app/manifest/route": "app/api/tools/citizen-app/manifest/route.js",
-  "/api/register/route": "app/api/register/route.js",
   "/api/receipts/route": "app/api/receipts/route.js",
+  "/api/register/route": "app/api/register/route.js",
+  "/api/tools/citizen-app/manifest/route": "app/api/tools/citizen-app/manifest/route.js",
   "/[locale]/page": "app/[locale]/page.js",
-  "/[locale]/tools/page": "app/[locale]/tools/page.js"
+  "/[locale]/register/page": "app/[locale]/register/page.js",
+  "/[locale]/tools/citizen-app/page": "app/[locale]/tools/citizen-app/page.js",
+  "/[locale]/tools/page": "app/[locale]/tools/page.js",
+  "/[locale]/dashboard/page": "app/[locale]/dashboard/page.js",
+  "/[locale]/receipts/page": "app/[locale]/receipts/page.js"
 }
