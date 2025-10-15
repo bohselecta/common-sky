@@ -1,0 +1,20 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* simple focus outline for a11y */
+:focus-visible { outline: 2px solid theme(colors.sky); outline-offset: 2px; }
+
+.flag-stripe {
+  background: linear-gradient(
+    to bottom,
+    #8CC5FF 0 24%,
+    #F2D6C9 24% 34%,
+    #E9C0A8 34% 44%,
+    #D9A07D 44% 54%,
+    #C07A56 54% 64%,
+    #A15D3E 64% 74%,
+    #7C3F2A 74% 84%,
+    #5C2D21 84% 100%
+  );
+}
