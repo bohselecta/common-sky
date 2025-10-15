@@ -17,7 +17,23 @@ export default function LanguageSwitcher({ currentLocale }: { currentLocale: str
 
   const handleLanguageChange = (locale: string) => {
     // Extract the current path without locale
-    const currentPath = window.location.pathname.replace(/^\/[a-z]{2}/, '') || '/';
+    let currentPath = window.location.pathname;
+    
+    // Remove existing locale prefix if present
+    if (currentPath.match(/^\/[a-z]{2}(\/|$)/)) {
+      currentPath = currentPath.replace(/^\/[a-z]{2}/, '');
+    }
+    
+    // Ensure we have a leading slash
+    if (!currentPath.startsWith('/')) {
+      currentPath = '/' + currentPath;
+    }
+    
+    // If we're at root, just use the locale
+    if (currentPath === '/') {
+      currentPath = '';
+    }
+    
     const newPath = `/${locale}${currentPath}`;
     router.push(newPath);
     setIsOpen(false);
